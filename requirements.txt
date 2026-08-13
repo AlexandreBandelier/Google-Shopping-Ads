@@ -1,1 +1,7 @@
-
+pandas
+openpyxl
+requests
+gdown
+lxml
+google-api-python-client
+google-auth
