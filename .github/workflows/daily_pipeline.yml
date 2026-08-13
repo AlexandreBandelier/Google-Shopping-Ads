@@ -1,0 +1,40 @@
+name: Daily Google Ads x WooCommerce Matching Pipeline
+
+on:
+  schedule:
+    # S'exécute automatiquement chaque jour à 6h00 UTC
+    - cron: '0 6 * * *'
+  # Lancement manuel depuis l'onglet Actions
+  workflow_dispatch:
+
+# Optimisation 3 : Restriction des permissions au strict nécessaire
+permissions:
+  contents: read
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    # Optimisation 2 : Sécurité anti-blocage (interrompt le job après 15 min max)
+    timeout-minutes: 15
+
+    steps:
+      - name: 1. Récupération du code du dépôt
+        uses: actions/checkout@v4
+
+      - name: 2. Configuration de Python 3.10 avec Cache
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          # Optimisation 1 : Activation du cache Pip via requirements.txt
+          cache: 'pip'
+
+      - name: 3. Installation des dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 4. Exécution du script main.py
+        env:
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+        run: |
+          python main.py
