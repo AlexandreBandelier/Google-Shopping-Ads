@@ -9,9 +9,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
-# ==========================================
 # 1. CONFIGURATION ET IDENTIFIANTS
-# ==========================================
 FILE_ID_ADS = '1_8quOdA863-70Q-vOfIRrvC6qe9eGAht'
 FILE_ID_FLUX = '1aCJeea5ZzVpvhFjYWeOBfigaGEi8R86-'
 DRIVE_FOLDER_ID = '1wz2Ke7rnmicVzSBl_-ALsK0EKJzQPQQw'
